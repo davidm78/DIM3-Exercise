@@ -3,8 +3,8 @@ Rango says: Hello World!
 {% if cat_list %}
         <UL>
         {% for cat in cat_list %}
-                <LI>{{ cat.name }}</LI>
-        {% endfor %}
+        	<LI><A HREF="/rango/cat/{{cat.url}}">{{cat.name}}</A></LI>
+	{% endfor %}
         </UL>
 {% else %}
         <P>No categories at present.</P>

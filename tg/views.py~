@@ -35,3 +35,11 @@ def category(request, category_name_url):
 
         context = RequestContext(request, context_dict)
         return HttpResponse(template.render(context))
+
+def encode_category(category_name):
+        # returns the name converted for insert into url
+        return category_name.replace(' ','_')
+
+def decode_category(category_url):
+        # returns the category name given the category url portion
+        return category_url.replace('_',' ')

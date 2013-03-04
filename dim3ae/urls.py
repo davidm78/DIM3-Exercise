@@ -8,7 +8,7 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
         url(r'^tg/', include('tg.urls')),
-url(r'^cat/(?P<category_name_url>\w+)', views.category, name='category'),
+
 
     # Uncomment the admin/doc line below to enable admin documentation:
 url(r'^admin/doc/', include('django.contrib.admindocs.urls')),

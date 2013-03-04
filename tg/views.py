@@ -2,7 +2,7 @@
 from django.http import HttpResponse
 from django.template import RequestContext, loader
 from tg.models import Category, Page
-
+from django.shortcuts import render_to_response
 
 
 def index(request):
@@ -43,3 +43,29 @@ def encode_category(category_name):
 def decode_category(category_url):
         # returns the category name given the category url portion
         return category_url.replace('_',' ')
+
+
+def add_category(request):
+        # immediately get the context - as it may contain posting data
+        context = RequestContext(request)
+        if request.method == 'POST':
+                # data has been entered into the form via Post
+                form = CategoryForm(request.POST)
+                if form.is_valid():
+                        # the form has been correctly filled in,
+                        # so lets save the data to the model
+                        cat = form.save(commit=True)
+                        # show the index page with the list of categories
+                        return index(request)
+                else:
+                        # the form contains errors,
+                        # show the form again, with error messages
+                        pass
+        else:
+                # a GET request was made, so we simply show a blank/empty form.
+                form = CategoryForm()
+
+        # pass on the context, and the form data.
+        return render_to_response('rango/add_category.html',
+                {'form': form }, context)
+
